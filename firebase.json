@@ -1,0 +1,8 @@
+{
+  "hosting": [
+    {
+      "target": "oshop",
+      "public": "dist/oshop"
+    }
+  ]
+}

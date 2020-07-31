@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "oshop-d420c": {
+      "hosting": {
+        "oshop": [
+          "oshop-d420c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "oshop-d420c"
+  }
+}
