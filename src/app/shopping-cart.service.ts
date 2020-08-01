@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Product } from './models/Products';
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 import { ShoppingCartItem } from './models/shopping-cart-item';
+import { Observable } from 'rxjs';
+import { ShoppingCart } from './models/shopping-cart';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +19,16 @@ export class ShoppingCartService {
     })
   }
   
-  private getCart(cartId: string){
-    return this.db.object('/shopping-cart/'+cartId);
+  async getCart(): Promise<Observable<ShoppingCart>>{
+    let cartId = await this.getOrCreateCartId();
+    return this.db.object('/shopping-cart/' + cartId).snapshotChanges()
+          .pipe(map(x => new ShoppingCart(x.payload.exportVal().items)));
   }
 
   private getItem(cartId: string, productId: string){
    return this.db.object('/shopping-cart/' + cartId + '/items/' + productId);
   }
-  private async  getOrCreateCartId(){ 
+  private async  getOrCreateCartId(): Promise<string>{ 
     let cartId= localStorage.getItem('cartId');  
     if(cartId) return cartId; 
 
@@ -42,7 +46,13 @@ export class ShoppingCartService {
         .pipe(take(1))
         .subscribe((item: ShoppingCartItem) => { 
           //if exist or not  update, as it wont make much diff in firebase 
-          item$.update({product: product, quantity: (item? (item.quantity || 0): 0) + 1 }); 
+          item$.update({
+            title: product.title,
+            category: product.category,
+            imageUrl: product.imageUrl,
+            price: product.price, 
+            quantity: (item? (item.quantity || 0) : 0 ) + 1  
+          }); 
     });
 
   }
