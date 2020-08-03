@@ -1,1 +1,46 @@
-<p>shopping-cart works!</p>
+<div class="row col-10" *ngIf="cart$ | async as cart"> 
+    <p>
+        You have successfully added {{ cart.totalCheckoutItemCount }} items in your shopping cart. 
+        <button 
+        (click)="clearCart()"
+        class="btn btn-light btn-sm">Clear Shopping Cart</button>
+    </p> 
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Product</th>
+                <th>price</th>
+                <th class="text-center" style="width: 200px">Quantity</th>
+                <th style="width: 100px" >Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of cart.items">
+                <td>
+                    <div [style.backgroundImage]="'url(' + item.imageUrl + ')'" class="thumbnail"></div>
+                </td>
+                <td>{{item.title}}</td>
+                <td>{{item.price | currency:'INR':true}}</td>
+                <td class="text-center">  
+                    <product-quantity [product]="item" [shopping-cart]="cart"> 
+                    </product-quantity>
+                </td>
+                <td>{{item.totalPrice | currency:'INR':true}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>{{ cart.totalPrice | currency:'INR':true }}</th>  
+            </tr>
+        </tfoot>
+    </table> 
+    <button 
+        *ngIf="cart.items.length"
+        routerLink="/check-out"
+        class="btn btn-primary">Check-Out</button>
+</div>

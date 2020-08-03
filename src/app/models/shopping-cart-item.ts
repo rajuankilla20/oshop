@@ -13,5 +13,7 @@ export class ShoppingCartItem{
 
       get totalPrice() {
         return (this.price * this.quantity);
-    }
+      }
+
+
 }

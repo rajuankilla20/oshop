@@ -11,10 +11,10 @@ export class  ShoppingCart {
         // tslint:disable-next-line: forin
         for (const productId in itemsMap) {
             const item = itemsMap[productId];
-            console.log('----- item ' + productId + " --- title " + item.title);
             this.items.push(new ShoppingCartItem({ ...item, key: productId })); // Objects that we get from firebase, so we map to shopping-cart-item object
         }
     }
+ 
 
     getQuantity(product: Product) {
         if (!this.itemsMap) // This is required here(was not added by Mosh) to prevent null ref error when the product card componenet
@@ -23,4 +23,19 @@ export class  ShoppingCart {
         const item = this.itemsMap[product.key];
         return item ? item.quantity : 0;
       }
+
+    get totalCheckoutItemCount(){
+        let count =0;
+        for (const productId in this.itemsMap) 
+            count += this.itemsMap[productId].quantity;  
+        return count;
+    }  
+
+    get totalPrice() {
+        let sum = 0;
+        for (const productId in this.items)
+            sum += this.items[productId].totalPrice;
+
+        return sum;
+    }
 }

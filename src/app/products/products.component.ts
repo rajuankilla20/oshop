@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent  implements OnInit, OnDestroy{
+export class ProductsComponent  implements OnInit{
 
   products: Product[]=[];   
   filteredProducts: Product[]=[];   
@@ -22,35 +22,35 @@ export class ProductsComponent  implements OnInit, OnDestroy{
   cart$ : Observable<ShoppingCart>; 
 
   constructor(
-      route: ActivatedRoute,
-      productService: ProductService,
+      private route: ActivatedRoute,
+      private productService: ProductService,
       private shoppingCartService: ShoppingCartService
      ) {  
- 
-       productService.getAll<Product>()
-                    .pipe(switchMap(products => {
-                      this.products = products;
-                      return route.queryParamMap;
-                    }))
-                    .subscribe(params => {
-                      this.category = params.get('category');  
-
-                      this.filteredProducts = (this.category)?
-                            this.products.filter(p => p.category.toLowerCase().includes(this.category.toLowerCase())):
-                            this.products; 
-                  }); 
-
-                  // this.shoppingCartService
+      
+     
    }
 
+
   async ngOnInit(){
-      // this.cart$ = await this.shoppingCartService.getCart(); 
       this.cart$=await this.shoppingCartService.getCart();
+      this.populateProducts();
+  }
+ 
 
+  private populateProducts(){
+    this.productService.getAll<Product>()
+      .pipe(switchMap(products => {
+        this.products = products;
+        return this.route.queryParamMap;}))
+      .subscribe(params => {
+        this.category = params.get('category');  
+        this.applyFilter(); 
+      });
   }
 
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
+  private applyFilter(){
+    this.filteredProducts = (this.category)?
+    this.products.filter(p => p.category.toLowerCase().includes(this.category.toLowerCase())):
+    this.products; 
   }
-
 }
