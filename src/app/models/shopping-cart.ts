@@ -14,7 +14,6 @@ export class  ShoppingCart {
             this.items.push(new ShoppingCartItem({ ...item, key: productId })); // Objects that we get from firebase, so we map to shopping-cart-item object
         }
     }
- 
 
     getQuantity(product: Product) {
         if (!this.itemsMap) // This is required here(was not added by Mosh) to prevent null ref error when the product card componenet
@@ -28,6 +27,7 @@ export class  ShoppingCart {
         let count =0;
         for (const productId in this.itemsMap) 
             count += this.itemsMap[productId].quantity;  
+
         return count;
     }  
 
