@@ -1,10 +1,10 @@
-import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/product.service';
-import { Subscription } from 'rxjs';
-import { Product } from 'src/app/models/Products';
+import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core'; 
+import { Subscription } from 'rxjs'; 
 import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort'; 
+import { Product } from 'app/models/Products';
+import { ProductService } from 'app/product.service';
 
 @Component({
   selector: 'app-admin-products',

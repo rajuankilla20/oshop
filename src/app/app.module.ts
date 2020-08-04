@@ -10,8 +10,7 @@ import { MatSortModule } from '@angular/material/sort';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from 'src/environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth'; 
 import { AppRoutingModule } from './app-routing.module';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -38,6 +37,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
 import { OrderService } from './order.service';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
+import { environment } from 'environments/environment';
 
 @NgModule({
   imports: [
