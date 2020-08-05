@@ -1,47 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { CustomFormsModule } from 'ngx-custom-validators';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material/table'  
-import { MatSortModule } from '@angular/material/sort';
-
-
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireAuthModule } from '@angular/fire/auth'; 
-import { AppRoutingModule } from './app-routing.module';
-import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './products/products.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { CheckOutComponent } from './check-out/check-out.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
-import { LoginComponent } from './login/login.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth-guard.service';
-import { UserService } from './user.service';
-import { AdminAuthGuard as AdminAuthGuard } from './admin-auth-guard.service';
-import { ProductFormComponent } from './admin/product-form/product-form.component';
-import { CategoryService } from './category.service';
 import { FormsModule } from '@angular/forms';
-import { ProductService } from './product.service';
-import { ProductFilterComponent } from './products/product-filter/product-filter.component';
-import { ProductCardComponent } from './product-card/product-card.component';
-import { ShoppingCartService } from './shopping-cart.service';
-import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
-import { OrderService } from './order.service';
-import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
-import { ShippingFormComponent } from './shipping-form/shipping-form.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'environments/environment';
+import { CustomFormsModule } from 'ngx-custom-validators';
+import { SharedModule } from 'shared/shared.module';
+
+import { AdminModule } from './admin/admin.module';
+import { AdminAuthGuard as AdminAuthGuard } from './admin/services/admin-auth-guard.service';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { ShoppingModule } from './shopping/shopping.module';
+
 
 @NgModule({
   imports: [
     BrowserModule,
+    SharedModule,
+    AdminModule,
+    ShoppingModule,
+    CoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -54,33 +39,10 @@ import { environment } from 'environments/environment';
     MatSortModule
   ],
   declarations: [
-    AppComponent,
-    BsNavbarComponent,
-    HomeComponent,
-    ProductsComponent,
-    ShoppingCartComponent,
-    CheckOutComponent,
-    OrderSuccessComponent,
-    LoginComponent,
-    MyOrdersComponent,
-    AdminProductsComponent,
-    AdminOrdersComponent,
-    ProductFormComponent,
-    ProductFilterComponent,
-    ProductCardComponent,
-    ProductQuantityComponent,
-    ShoppingCartSummaryComponent,
-    ShippingFormComponent
+    AppComponent
   ],
-  providers: [
-    AuthService,
-    AuthGuard,
-    AdminAuthGuard,
-    UserService,
-    CategoryService  ,
-    ProductService ,
-    ShoppingCartService,
-    OrderService
+  providers: [ 
+    AdminAuthGuard
   ],
   bootstrap: [AppComponent]
 })
