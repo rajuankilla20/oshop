@@ -11,6 +11,7 @@ import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { UserService } from './services/user.service';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -25,6 +26,7 @@ import { UserService } from './services/user.service';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     AppRoutingModule    
   ],
   providers: [ 

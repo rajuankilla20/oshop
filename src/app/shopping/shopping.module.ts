@@ -12,6 +12,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from 'shared/services/auth-guard.service';
 import { SharedModule } from 'shared/shared.module';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -30,6 +34,10 @@ import { SharedModule } from 'shared/shared.module';
     CommonModule,
     FormsModule,
     SharedModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule,
     RouterModule.forChild([
       { 
         path: 'products', 

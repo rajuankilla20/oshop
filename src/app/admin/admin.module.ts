@@ -7,6 +7,13 @@ import { AdminOrdersComponent } from './components/admin-orders/admin-orders.com
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from 'app/app-routing.module';
+import { SharedModule } from 'shared/shared.module';
 
 
 
@@ -17,7 +24,13 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
     ProductFormComponent,
   ],
   imports: [
-    CommonModule,
+    CommonModule,   
+    FormsModule, 
+    SharedModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule,
     RouterModule.forChild([
    
       { 
