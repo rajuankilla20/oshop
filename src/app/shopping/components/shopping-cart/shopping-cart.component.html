@@ -1,10 +1,12 @@
-<div class="row col-10" *ngIf="cart$ | async as cart"> 
-    <p>
-        You have successfully added {{ cart.totalCheckoutItemCount }} items in your shopping cart. 
-        <button 
-        (click)="clearCart()"
-        class="btn btn-light btn-sm">Clear Shopping Cart</button>
-    </p> 
+<div class="card" *ngIf="cart$ | async as cart" style="width: 80%;"> 
+    <div class="card-body">
+        <p>
+            You have successfully added {{ cart.totalCheckoutItemCount }} items in your shopping cart. 
+            <button 
+            (click)="clearCart()"
+            class="btn btn-light btn-sm float-right">Clear Shopping Cart</button>
+        </p> 
+    </div> 
     <table class="table">
         <thead>
             <tr>
@@ -37,10 +39,15 @@
                 <th></th>
                 <th>{{ cart.totalPrice | currency:'INR':true }}</th>  
             </tr>
+            <tr>
+                <th colspan="5">
+                    <button 
+                    *ngIf="cart.items.length"
+                    routerLink="/check-out"
+                    class="btn btn-primary">Check-Out</button>
+                </th>
+            </tr>
         </tfoot>
     </table> 
-    <button 
-        *ngIf="cart.items.length"
-        routerLink="/check-out"
-        class="btn btn-primary">Check-Out</button>
+  
 </div>
